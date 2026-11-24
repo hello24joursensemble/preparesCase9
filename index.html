@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#244b3d">
+<title>Chocolat chaud &amp; bar à toppings | 24 jours ensemble</title>
+<style>
+:root{--green:#244b3d;--sage:#cfe3b0;--pink:#ffb8cc;--cream:#f4f1e4;--ink:#25372f;--muted:#66756c;--white:#fffdf7}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+header{background:var(--green);color:var(--cream);padding:30px 18px 34px;text-align:center;position:relative;overflow:hidden}
+header:before,header:after{content:"✦";position:absolute;color:var(--sage);font-size:34px;opacity:.8}header:before{left:9%;top:22px}header:after{right:10%;bottom:15px;color:var(--pink)}
+.kicker{letter-spacing:.18em;text-transform:uppercase;font-size:.75rem;color:var(--sage);font-weight:bold}
+h1{font-family:Georgia,serif;font-size:clamp(2rem,7vw,3.2rem);line-height:1.08;margin:12px 0 8px;color:var(--pink)}
+header p{margin:0 auto;max-width:540px;color:#f4f1e4}
+main{max-width:760px;margin:0 auto;padding:22px 16px 48px}
+.card{background:var(--white);border:1px solid #e5e5d8;border-radius:20px;padding:20px;margin:0 0 17px;box-shadow:0 5px 18px #244b3d0b}
+h2{font-family:Georgia,serif;color:var(--green);font-size:1.5rem;margin:0 0 12px}
+.intro{font-size:1.05rem}.tag{display:inline-block;background:var(--sage);color:var(--green);padding:5px 11px;border-radius:30px;font-size:.78rem;font-weight:bold;margin:5px 5px 0 0}
+ul{padding-left:0;list-style:none;margin:10px 0 0}li{margin:9px 0}
+.check{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:12px;background:#f7f7ef}
+input[type=checkbox]{accent-color:var(--green);width:19px;height:19px;margin-top:2px;flex:none}
+.check:has(input:checked) span{text-decoration:line-through;color:var(--muted)}
+.progress{height:9px;background:#e8eadf;border-radius:20px;overflow:hidden;margin-top:12px}.bar{height:100%;width:0;background:var(--green);transition:width .2s}
+.steps{counter-reset:step}.step{display:flex;gap:13px;align-items:flex-start;margin:14px 0;padding:12px;background:#f7f7ef;border-radius:14px}.num{background:var(--pink);color:var(--green);font-weight:bold;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;flex:none}
+button{border:0;border-radius:30px;padding:11px 17px;background:var(--green);color:white;font-weight:bold;font-size:.95rem;cursor:pointer}button.secondary{background:var(--sage);color:var(--green)}button:focus-visible,input:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.timer{text-align:center;background:var(--green);color:var(--cream);border-radius:17px;padding:19px}.time{font-variant-numeric:tabular-nums;font-size:2.8rem;font-weight:bold;letter-spacing:.04em;color:var(--pink);margin:5px 0 12px}
+.timer p{margin:0 0 12px}.timer button{background:var(--pink);color:var(--green);margin:3px}.timer button.secondary{background:var(--sage)}
+textarea{width:100%;min-height:75px;border:1px solid #d8dfd0;border-radius:12px;padding:12px;font:inherit;background:#fffefb}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:8px 10px 28px}
+.small{font-size:.88rem;color:var(--muted)}
+@media(min-width:620px){main{padding-top:28px}.card{padding:24px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">24 jours ensemble · Calendrier de l'Avent</div>
+  <h1>Le chocolat chaud<br>&amp; bar à toppings</h1>
+  <p>Aujourd'hui, chacun compose sa tasse : à vous de créer le chocolat chaud le plus gourmand !</p>
+</header>
+<main>
+  <section class="card">
+    <p class="intro">☕ Une boisson réconfortante, un grand choix de toppings et beaucoup de plaisir à créer ensemble.</p>
+    <span class="tag">Activité cuisine</span><span class="tag">Environ 15 min</span><span class="tag">Pour 4 tasses</span>
+  </section>
+
+  <section class="card">
+    <h2>🛒 Les ingrédients à préparer</h2>
+    <p class="small">Cochez chaque élément au fur et à mesure.</p>
+    <ul id="ingredients">
+      <li><label class="check"><input type="checkbox"><span>1 litre de lait</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>200 g de chocolat pâtissier (noir ou au lait)</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>De la chantilly</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>Des guimauves</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>Des épices (cannelle, zeste d'orange…)</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>Une casserole, un fouet et des tasses</span></label></li>
+    </ul>
+    <div class="progress"><div class="bar" id="ingredientBar"></div></div>
+    <p class="small" id="ingredientCount" aria-live="polite">0 ingrédient préparé sur 6</p>
+  </section>
+
+  <section class="card">
+    <h2>👩‍🍳 La recette pas à pas</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div><strong>Chauffer le lait</strong><br>Les adultes versent le lait dans une casserole et le chauffent doucement, sans le laisser bouillir.</div></div>
+      <div class="step"><div class="num">2</div><div><strong>Fondre le chocolat</strong><br>Ajoutez le chocolat en morceaux dans le lait chaud et fouettez jusqu'à ce qu'il soit complètement fondu.</div></div>
+      <div class="step"><div class="num">3</div><div><strong>Servir</strong><br>Versez le chocolat chaud dans les tasses.</div></div>
+      <div class="step"><div class="num">4</div><div><strong>Ajouter les toppings</strong><br>Chacun compose sa tasse : chantilly, guimauves, épices… Place à la créativité !</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>⏱️ Le minuteur du lait</h2>
+    <div class="timer">
+      <p>Prêts à chauffer le lait ?</p>
+      <div class="time" id="display" aria-live="polite">05:00</div>
+      <button id="start">Démarrer</button>
+      <button class="secondary" id="pause">Pause</button>
+      <button class="secondary" id="reset">Réinitialiser</button>
+      <p id="timerMessage" class="small" style="color:#f4f1e4;margin-top:12px">Le minuteur sonnera quand le lait sera bien chaud.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🍬 Notre bar à toppings</h2>
+    <p class="small">Cochez les toppings que vous mettez sur la table.</p>
+    <ul>
+      <li><label class="check"><input type="checkbox"><span>🍦 La chantilly</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>☁️ Les guimauves</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>🌿 Les épices (cannelle…)</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>🍊 Le zeste d'orange</span></label></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>🎨 Le défi des apprentis chocolatiers</h2>
+    <p>Chacun compose sa tasse de façon originale (épices, orange…) et invente un nom pour son chocolat chaud ! Puis, en famille, élisez votre création préférée.</p>
+    <ul>
+      <li><label class="check"><input type="checkbox"><span>La plus originale</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>La plus jolie</span></label></li>
+      <li><label class="check"><input type="checkbox"><span>La plus gourmande</span></label></li>
+    </ul>
+    <p style="margin:15px 0 7px"><strong>Le nom de notre chocolat chaud :</strong></p>
+    <textarea placeholder="Ex. : Le nuage à la cannelle, le soleil d'orange…"></textarea>
+  </section>
+
+  <section class="card">
+    <h2>✨ Nos idées pour varier</h2>
+    <ul>
+      <li>🍊 Une touche d'orange pour une saveur de fête</li>
+      <li>🧡 Un peu de cannelle ou d'autres épices douces</li>
+      <li>🎄 Des décorations rouges, vertes ou dorées pour une touche de Noël</li>
+    </ul>
+    <p class="small">Pensez à vérifier les allergies alimentaires avant de choisir les toppings.</p>
+  </section>
+  <footer>❤️ La magie de Noël ne coûte rien.<br>24 jours ensemble</footer>
+</main>
+<script>
+const boxes=[...document.querySelectorAll('#ingredients input')];
+function updateProgress(){const n=boxes.filter(x=>x.checked).length;document.getElementById('ingredientBar').style.width=(n/boxes.length*100)+'%';document.getElementById('ingredientCount').textContent=`${n} ingrédient${n>1?'s':''} préparé${n>1?'s':''} sur ${boxes.length}`;}
+boxes.forEach(x=>x.addEventListener('change',updateProgress));
+const START=300;
+let remaining=START, interval=null;
+const display=document.getElementById('display'), message=document.getElementById('timerMessage');
+function render(){const m=Math.floor(remaining/60),s=remaining%60;display.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
+document.getElementById('start').addEventListener('click',()=>{if(interval||remaining<=0)return;message.textContent='C’est parti !';interval=setInterval(()=>{remaining--;render();if(remaining<=0){clearInterval(interval);interval=null;message.textContent='🎉 Le lait est chaud ! Place au chocolat !';if('Notification'in window&&Notification.permission==='granted')new Notification('Le lait est prêt !');}},1000);});
+document.getElementById('pause').addEventListener('click',()=>{if(interval){clearInterval(interval);interval=null;message.textContent='Minuteur en pause.';}});
+document.getElementById('reset').addEventListener('click',()=>{if(interval)clearInterval(interval);interval=null;remaining=START;render();message.textContent='Le minuteur sonnera quand le lait sera bien chaud.';});
+render();
+</script>
+</body>
+</html>
